@@ -3,80 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tupain Mart - eCommerce</title>
+    <title>tech Mart - eCommerce</title>
 
     <style>
         
         * { box-sizing: border-box; }
         html, body { height: 100%; }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8ed 100%);
             color: #333;
-            -webkit-font-smoothing:antialiased;
-            -moz-osx-font-smoothing:grayscale;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Header */
         header {
-            background-color: #232f3e;
+            background: linear-gradient(135deg, #1a2332 0%, #232f3e 100%);
             color: #fff;
-            padding: 12px 20px;
+            padding: 15px 25px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 20px;
             flex-wrap: wrap;
             position: sticky;
             top: 0;
             z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         header .logo {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            min-width: 140px;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            min-width: 150px;
+            color: #ffb14d;
         }
 
         /* flexible search that shrinks on small screens */
         header .search-bar {
             flex: 1 1 360px;
             max-width: 720px;
-            padding: 10px 12px;
+            padding: 12px 16px;
             font-size: 15px;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.08);
             color: #fff;
-            border-radius: 6px;
+            border-radius: 8px;
             outline: none;
+            transition: all 0.3s ease;
         }
-        header .search-bar::placeholder { color: rgba(255,255,255,0.7); }
+        header .search-bar:focus {
+            background: rgba(255,255,255,0.15);
+            border-color: #ffb14d;
+            box-shadow: 0 0 10px rgba(255, 177, 77, 0.3);
+        }
+        header .search-bar::placeholder { color: rgba(255,255,255,0.6); }
 
         header .nav-links {
             display: flex;
-            gap: 14px;
+            gap: 20px;
             align-items: center;
             white-space: nowrap;
         }
         header .nav-links a {
             color: #fff;
             text-decoration: none;
-            font-size: 15px;
-            opacity: 0.95;
-            transition: color .15s, opacity .15s;
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: color 0.2s, opacity 0.2s;
         }
         header .nav-links a:hover { color: #ffb14d; opacity: 1; }
 
         header .cart {
-            background-color: #ff9900;
-            color: #1a1a1a;
-            padding: 9px 14px;
-            border-radius: 6px;
+            background: linear-gradient(135deg, #ff9900 0%, #ff8800 100%);
+            color: #fff;
+            padding: 11px 18px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             flex-shrink: 0;
+            transition: all 0.2s;
+            box-shadow: 0 4px 8px rgba(255, 152, 0, 0.3);
+        }
+        header .cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 152, 0, 0.4);
         }
 
         /* Main layout - use responsive grid */
@@ -86,11 +101,11 @@
 
         .main-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 20px;
             align-items: start;
         }
 
@@ -98,41 +113,63 @@
         .main-container > h2,
         .main-container > .page-title {
             grid-column: 1 / -1;
-            margin: 8px 4px 16px;
-            font-size: 22px;
-            color: #222;
+            margin: 0 0 20px 0;
+            font-size: 28px;
+            color: #1a2332;
+            text-align: center;
+            font-weight: 700;
+            border-bottom: 3px solid #ff9900;
+            padding-bottom: 15px;
+        }
+
+        .main-container > h3 {
+            grid-column: 1 / -1;
+            margin: 25px 0 15px 0;
+            font-size: 20px;
+            color: #232f3e;
+            font-weight: 700;
+        }
+
+        .main-container > p,
+        .main-container > ul {
+            grid-column: 1 / -1;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
         }
 
         .product {
             background-color: #fff;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             width: 100%;
             margin: 0;
-            box-shadow: 0 6px 18px rgba(35,47,62,0.06);
+            box-shadow: 0 8px 20px rgba(35,47,62,0.08);
             text-align: center;
-            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
             display: flex;
             flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .product:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px rgba(35,47,62,0.12);
+            transform: translateY(-10px);
+            box-shadow: 0 16px 40px rgba(35,47,62,0.16);
         }
 
         .product img {
             width: 100%;
-            height: 160px;
+            height: 220px;
             object-fit: cover;
             display: block;
+            background-color: #f0f0f0;
         }
 
         .product-info {
-            padding: 16px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             flex: 1 1 auto;
         }
 
@@ -140,66 +177,104 @@
             font-size: 18px;
             color: #222;
             margin: 0;
-            line-height: 1.2;
+            line-height: 1.3;
+            font-weight: 600;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .product .price {
-            font-size: 18px;
-            color: #2e8b57;
-            font-weight: 700;
-            margin-top: 6px;
+            font-size: 22px;
+            color: #ff9900;
+            font-weight: 800;
+            margin-top: 8px;
         }
 
         .product button {
-            background-color: #ff9900;
+            background: linear-gradient(135deg, #ff9900 0%, #ff8800 100%);
             color: #fff;
-            padding: 10px 12px;
+            padding: 12px 16px;
             font-size: 15px;
+            font-weight: 700;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             width: 100%;
-            transition: background-color 0.18s, transform 0.12s;
+            transition: all 0.2s;
             margin-top: auto;
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
         }
 
-        .product button:hover { background-color: #e68900; transform: translateY(-1px); }
+        .product button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4);
+        }
+
+        .product button:active {
+            transform: translateY(0);
+        }
 
         /* Footer */
         footer {
-            background-color: #232f3e;
+            background: linear-gradient(135deg, #1a2332 0%, #232f3e 100%);
             color: #fff;
-            padding: 20px 12px;
+            padding: 30px 20px;
             text-align: center;
+            margin-top: 40px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
         }
-        footer p { margin: 6px 0; }
-        footer a { color: rgba(255,255,255,0.9); text-decoration: none; margin: 0 8px; font-size: 14px; }
-        footer a:hover { text-decoration: underline; }
+        footer p { margin: 8px 0; font-size: 15px; }
+        footer a { color: #ffb14d; text-decoration: none; margin: 0 12px; font-size: 14px; transition: opacity 0.2s; }
+        footer a:hover { opacity: 0.8; text-decoration: underline; }
 
         /* Responsive tweaks */
         @media (max-width: 900px) {
-            header { padding: 10px 14px; }
-            header .logo { min-width: 120px; }
-            header .search-bar { flex-basis: 220px; }
+            header { 
+                padding: 12px 16px; 
+                gap: 12px;
+            }
+            header .logo { 
+                font-size: 20px;
+                min-width: 120px; 
+            }
+            header .search-bar { flex-basis: 280px; }
+            .main-container {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 20px;
+                padding: 16px;
+            }
         }
 
         @media (max-width: 640px) {
             header {
-                justify-content: space-between;
-                gap: 8px;
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 12px;
+            }
+            header .logo { 
+                width: 100%;
+                text-align: center;
+                font-size: 20px;
+            }
+            header .search-bar { 
+                width: 100%; 
+                flex-basis: auto; 
             }
             header .nav-links {
                 width: 100%;
                 justify-content: center;
-                order: 3;
-                margin-top: 8px;
+                gap: 12px;
                 flex-wrap: wrap;
-                gap: 10px;
             }
-            header .search-bar { order: 2; width: 100%; flex-basis: auto; }
-            header .cart { order: 4; }
-            .main-container { padding: 12px; gap: 12px; }
-            .product img { height: 140px; }
+            header .cart { width: 100%; text-align: center; }
+            .main-container { 
+                grid-template-columns: 1fr;
+                padding: 12px; 
+                gap: 16px; 
+            }
+            .product img { height: 180px; }
         }
     </style>
 
@@ -208,7 +283,7 @@
 
     <!-- Header -->
     <header>
-        <div class="logo">Tupain Mart</div>
+        <div class="logo">Tech Mart</div>
         <input type="text" class="search-bar" placeholder="Search for products...">
         <div class="nav-links">
             <a href="#home">Home</a>
@@ -224,20 +299,38 @@
     <div id="home" class="main-container">
         <h2>Featured Products</h2>
         <div class="product">
-            <img src="https://via.placeholder.com/300x200" alt="Product 1">
+            <img src="https://images.oppo.com/content/dam/oppo/mobile/a-series/a16/a16-product-image.jpg" alt="oppo A16">
             <div class="product-info">
-                <h3>Product 1</h3>
-                <p class="price">$20.00</p>
-                <button onclick="addToCart('Product 1', 20)">Add to Cart</button>
+                <h3>OPPO A16</h3>
+                <p class="price">$199.99</p>
+                <button onclick="addToCart('OPPO A16', 199.99)">Add to Cart</button>
             </div>
         </div>
 
         <div class="product">
-            <img src="https://via.placeholder.com/300x200" alt="Product 2">
+            <img src="https://d2r55xnwy6rb0u.cloudfront.net/uploads/vivo_v29_ultra_d8d8e8c8b8.jpg" alt="Vivo V29">
             <div class="product-info">
-                <h3>Product 2</h3>
-                <p class="price">$35.00</p>
-                <button onclick="addToCart('Product 2', 35)">Add to Cart</button>
+                <h3>Vivo V29</h3>
+                <p class="price">$349.99</p>
+                <button onclick="addToCart('Vivo V29', 349.99)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://www.apple.com/in/iphone-15/images/overview/hero/iphone15__cvng7z2twule_large.jpg" alt="iPhone 15">
+            <div class="product-info">
+                <h3>iPhone 15</h3>
+                <p class="price">$899.99</p>
+                <button onclick="addToCart('iPhone 15', 899.99)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.samsung.com/is/image/samsung/p6pim/in/2401/gallery/in-galaxy-s24-sm-s921bzkeinu-539262-sm-s921bzkeinu-539262-thumb-539262.jpg" alt="Samsung S24">
+            <div class="product-info">
+                <h3>Samsung S24</h3>
+                <p class="price">$799.99</p>
+                <button onclick="addToCart('Samsung S24', 799.99)">Add to Cart</button>
             </div>
         </div>
     </div>
@@ -246,24 +339,76 @@
     <div id="shop" class="main-container">
         <h2>All Products</h2>
         <div class="product">
-            <img src="https://via.placeholder.com/300x200" alt="Product 3">
+            <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6487/6487267_sd.jpg" alt="iPhone 14">
             <div class="product-info">
-                <h3>Product 3</h3>
-                <p class="price">2000rs</p>
-                <button onclick="addToCart('Product 3', 50)">Add to Cart</button>
+                <h3>iPhone 14</h3>
+                <p class="price">$799.99</p>
+                <button onclick="addToCart('iPhone 14', 799.99)">Add to Cart</button>
             </div>
         </div>
 
         <div class="product">
-            <img src="https://via.placeholder.com/300x200" alt="Product 4">
+            <img src="https://www.apple.com/in/iphone-12/images/overview/select/iphone12__jfp4b7t7u4xa_large.jpg" alt="iPhone 12">
             <div class="product-info">
-                <h3>Product 4</h3>
-                <p class="price">$40.00</p>
-                <button onclick="addToCart('Product 4', 40)">Add to Cart</button>
+                <h3>iPhone 12</h3>
+                <p class="price">$399.99</p>
+                <button onclick="addToCart('iPhone 12', 399.99)">Add to Cart</button>
             </div>
         </div>
 
-        <!-- More Products -->
+        <div class="product">
+            <img src="https://lh3.googleusercontent.com/mPkHOK7LUrMLdLXiIJPBnr4h8S_-Lg3VVH6bPuB7fMbKHLWAcvQKo0J6wKlTMKGq8t19Yaa0Ag8D1L_RMQ=w526-rw" alt="Google Pixel 8">
+            <div class="product-info">
+                <h3>Google Pixel 8</h3>
+                <p class="price">$699.99</p>
+                <button onclick="addToCart('Google Pixel 8', 699.99)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://image.oneplus.com/og/202312/37e9df8bae7b4fd4b85e1a2e4a5c8d0e.png" alt="OnePlus 12">
+            <div class="product-info">
+                <h3>OnePlus 12</h3>
+                <p class="price">$649.99</p>
+                <button onclick="addToCart('OnePlus 12', 649.99)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://i02.appevents.com/1090011_0_1103_518_600.jpg" alt="Xiaomi 14">
+            <div class="product-info">
+                <h3>Xiaomi 14</h3>
+                <p class="price">$549.99</p>
+                <button onclick="addToCart('Xiaomi 14', 549.99)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.samsung.com/is/image/samsung/p6pim/in/sm-a546bldbinu/gallery/in-galaxy-a54-5g-sm-a546-sm-a546bldbinu-thumb-539315.jpg" alt="Galaxy A54">
+            <div class="product-info">
+                <h3>Galaxy A54</h3>
+                <p class="price">$449.99</p>
+                <button onclick="addToCart('Galaxy A54', 449.99)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://motorolaus.b-cdn.net/wp-content/uploads/2024/02/edge-50-pro-black.jpg" alt="Motorola Edge">
+            <div class="product-info">
+                <h3>Motorola Edge 50</h3>
+                <p class="price">$499.99</p>
+                <button onclick="addToCart('Motorola Edge 50', 499.99)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://cdn.shopify.com/s/files/1/0467/5070/7124/products/black_6ffde2e4-b825-4ece-9d86-55c87236dd9f_1024x1024.jpg" alt="Nothing Phone 2">
+            <div class="product-info">
+                <h3>Nothing Phone 2</h3>
+                <p class="price">$579.99</p>
+                <button onclick="addToCart('Nothing Phone 2', 579.99)">Add to Cart</button>
+            </div>
+        </div>
     </div>
 
     <!-- About Us Page -->
