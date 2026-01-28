@@ -4,153 +4,205 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tupain Mart - eCommerce</title>
+
     <style>
-        /* General Styling */
+        
+        * { box-sizing: border-box; }
+        html, body { height: 100%; }
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;
             color: #333;
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
         }
 
         /* Header */
         header {
             background-color: #232f3e;
-            color: white;
-            padding: 20px;
+            color: #fff;
+            padding: 12px 20px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         header .logo {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            min-width: 140px;
         }
 
+        /* flexible search that shrinks on small screens */
         header .search-bar {
-            width: 60%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            flex: 1 1 360px;
+            max-width: 720px;
+            padding: 10px 12px;
+            font-size: 15px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.06);
+            color: #fff;
+            border-radius: 6px;
+            outline: none;
         }
+        header .search-bar::placeholder { color: rgba(255,255,255,0.7); }
 
+        header .nav-links {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            white-space: nowrap;
+        }
         header .nav-links a {
-            color: white;
+            color: #fff;
             text-decoration: none;
-            margin-left: 20px;
-            font-size: 16px;
+            font-size: 15px;
+            opacity: 0.95;
+            transition: color .15s, opacity .15s;
         }
-
-        header .nav-links a:hover {
-            color: #ff9900;
-        }
+        header .nav-links a:hover { color: #ffb14d; opacity: 1; }
 
         header .cart {
             background-color: #ff9900;
-            padding: 10px 20px;
-            border-radius: 5px;
+            color: #1a1a1a;
+            padding: 9px 14px;
+            border-radius: 6px;
             cursor: pointer;
+            font-weight: 600;
+            flex-shrink: 0;
         }
 
-        /* Main Content */
+        /* Main layout - use responsive grid */
+        main, .page {
+            width: 100%;
+        }
+
         .main-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 16px;
+            align-items: start;
+        }
+
+        /* Ensure section titles span full width */
+        .main-container > h2,
+        .main-container > .page-title {
+            grid-column: 1 / -1;
+            margin: 8px 4px 16px;
+            font-size: 22px;
+            color: #222;
         }
 
         .product {
-            background-color: white;
-            border-radius: 8px;
+            background-color: #fff;
+            border-radius: 10px;
             overflow: hidden;
-            width: 300px;
-            margin: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            margin: 0;
+            box-shadow: 0 6px 18px rgba(35,47,62,0.06);
             text-align: center;
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .product:hover {
-            transform: scale(1.05);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(35,47,62,0.12);
         }
 
         .product img {
             width: 100%;
-            height: 200px;
+            height: 160px;
             object-fit: cover;
+            display: block;
         }
 
         .product-info {
-            padding: 20px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1 1 auto;
         }
 
         .product h3 {
-            font-size: 22px;
-            color: #333;
-            margin: 10px 0;
+            font-size: 18px;
+            color: #222;
+            margin: 0;
+            line-height: 1.2;
         }
 
         .product .price {
-            font-size: 20px;
-            color: #4CAF50;
-            margin-bottom: 20px;
+            font-size: 18px;
+            color: #2e8b57;
+            font-weight: 700;
+            margin-top: 6px;
         }
 
         .product button {
             background-color: #ff9900;
-            color: white;
-            padding: 12px;
-            font-size: 16px;
+            color: #fff;
+            padding: 10px 12px;
+            font-size: 15px;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             width: 100%;
-            transition: background-color 0.3s;
+            transition: background-color 0.18s, transform 0.12s;
+            margin-top: auto;
         }
 
-        .product button:hover {
-            background-color: #e68900;
-        }
+        .product button:hover { background-color: #e68900; transform: translateY(-1px); }
 
         /* Footer */
         footer {
             background-color: #232f3e;
-            color: white;
-            padding: 20px 0;
+            color: #fff;
+            padding: 20px 12px;
             text-align: center;
         }
+        footer p { margin: 6px 0; }
+        footer a { color: rgba(255,255,255,0.9); text-decoration: none; margin: 0 8px; font-size: 14px; }
+        footer a:hover { text-decoration: underline; }
 
-        footer a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
+        /* Responsive tweaks */
+        @media (max-width: 900px) {
+            header { padding: 10px 14px; }
+            header .logo { min-width: 120px; }
+            header .search-bar { flex-basis: 220px; }
         }
 
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Mobile Responsiveness */
-        @media screen and (max-width: 768px) {
-            .product {
-                width: 45%;
+        @media (max-width: 640px) {
+            header {
+                justify-content: space-between;
+                gap: 8px;
             }
-        }
-
-        @media screen and (max-width: 480px) {
-            .product {
+            header .nav-links {
                 width: 100%;
+                justify-content: center;
+                order: 3;
+                margin-top: 8px;
+                flex-wrap: wrap;
+                gap: 10px;
             }
-
-            header .search-bar {
-                width: 70%;
-            }
+            header .search-bar { order: 2; width: 100%; flex-basis: auto; }
+            header .cart { order: 4; }
+            .main-container { padding: 12px; gap: 12px; }
+            .product img { height: 140px; }
         }
     </style>
+// ...existing code...
 </head>
 <body>
 
